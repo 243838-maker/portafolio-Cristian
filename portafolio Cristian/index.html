@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristian Ruiz | Desarrollador de Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-oscuro: #0a1128;
+            --azul-primario: #1c4ed8;
+            --azul-brillante: #3b82f6;
+            --azul-claro: #dbeafe;
+            --fondo: #f8fafc;
+            --texto: #0f172a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--fondo);
+            color: var(--texto);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Menú Glassmorphism --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(248, 250, 252, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--azul-oscuro);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--texto);
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--azul-primario);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 5% 0;
+            gap: 50px;
+            position: relative;
+        }
+
+        .hero-text {
+            flex: 1;
+            animation: fadeUp 1s ease-out;
+        }
+
+        .hero-text h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 6vw, 6rem);
+            line-height: 1;
+            color: var(--azul-oscuro);
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero-text h1 span {
+            color: var(--azul-primario);
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #475569;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .btn-main {
+            display: inline-block;
+            padding: 18px 40px;
+            background-color: var(--azul-oscuro);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(10, 17, 40, 0.2);
+            background-color: var(--azul-primario);
+        }
+
+        /* --- Imagen Brutalista --- */
+        .hero-img-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            animation: fadeLeft 1s ease-out;
+        }
+
+        .img-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 4/5;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0 0 0 30%;
+            position: relative;
+            z-index: 2;
+            box-shadow: -15px 15px 0px var(--azul-claro);
+        }
+
+        .img-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -30px;
+            width: 100%;
+            height: 100%;
+            border: 4px solid var(--azul-oscuro);
+            border-radius: 0 0 0 30%;
+            z-index: 1;
+        }
+
+        /* --- Carrusel Infinito (Marquee) --- */
+        .marquee-section {
+            background-color: var(--azul-oscuro);
+            padding: 30px 0;
+            overflow: hidden;
+            position: relative;
+            transform: rotate(-2deg);
+            width: 105vw;
+            margin-left: -2vw;
+            margin-top: 50px;
+            margin-bottom: 100px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .marquee-inner {
+            display: flex;
+            width: 200%;
+            animation: marquee 15s linear infinite;
+        }
+
+        .marquee-inner span {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--azul-claro);
+            text-transform: uppercase;
+            white-space: nowrap;
+            padding: 0 20px;
+        }
+
+        /* --- Proyectos --- */
+        .proyectos {
+            padding: 50px 5%;
+        }
+
+        .seccion-titulo {
+            font-family: 'Syne', sans-serif;
+            font-size: 4rem;
+            color: var(--azul-oscuro);
+            margin-bottom: 60px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .grid-proyectos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .tarjeta-proyecto {
+            background: white;
+            border: 2px solid rgba(0,0,0,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tarjeta-proyecto::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--azul-primario);
+            transition: height 0.4s ease;
+            z-index: 0;
+        }
+
+        .tarjeta-proyecto:hover {
+            transform: translateY(-15px);
+            border-color: var(--azul-primario);
+            box-shadow: 0 25px 50px -12px rgba(28, 78, 216, 0.25);
+        }
+
+        .tarjeta-proyecto:hover::before {
+            height: 10px;
+        }
+
+        .contenido-proyecto {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contenido-proyecto h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--azul-oscuro);
+        }
+
+        .contenido-proyecto p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .tags-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tags-tech span {
+            background: var(--azul-claro);
+            color: var(--azul-primario);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* --- Footer / Contacto --- */
+        footer {
+            background-color: var(--azul-oscuro);
+            color: white;
+            padding: 100px 5% 50px;
+            margin-top: 100px;
+            text-align: center;
+            border-radius: 50px 50px 0 0;
+        }
+
+        footer h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 40px;
+        }
+
+        .link-contacto {
+            font-size: 2rem;
+            color: var(--azul-brillante);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .link-contacto:hover {
+            border-color: var(--azul-brillante);
+        }
+
+        /* --- Animaciones Keyframes --- */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeLeft {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 150px; }
+            .hero-text h1 { font-size: 3.5rem; }
+            .img-wrapper { max-width: 100%; aspect-ratio: 1/1; }
+            .marquee-section { transform: rotate(0); width: 100vw; margin-left: 0; }
+            .grid-proyectos { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Ocultar menú en móviles por simplicidad */
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">CR.</a>
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <section id="inicio" class="hero">
+        <div class="hero-text">
+            <h1>Hola, soy<br><span>Cristian Ruiz</span></h1>
+            <p>Desarrollador de software construyendo soluciones reales. Actualmente forjando mis bases técnicas en la Universidad Politécnica, enfoco mi trabajo en crear código limpio y arquitecturas robustas que resuelvan problemas reales mediante interfaces web y aplicaciones móviles.</p>
+            <a href="#contacto" class="btn-main">Hablemos de código</a>
+        </div>
+        <div class="hero-img-container">
+            <div class="img-wrapper">
+                <!-- COLOCA AQUÍ TU FOTO -->
+                <img src="foto1.jpeg" alt="Cristian Ruiz">
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrusel Infinito de Skills -->
+    <div class="marquee-section">
+        <div class="marquee-inner">
+            <span>PYTHON ✦ C++ ✦ JAVASCRIPT ✦ JAVA ✦ HTML ✦ CSS ✦ SQL ✦ KOTLIN ✦ </span>
+            <span>PYTHON ✦ C++ ✦ JAVASCRIPT ✦ JAVA ✦ HTML ✦ CSS ✦ SQL ✦ KOTLIN ✦ </span>
+            <span>PYTHON ✦ C++ ✦ JAVASCRIPT ✦ JAVA ✦ HTML ✦ CSS ✦ SQL ✦ KOTLIN ✦ </span>
+            <span>PYTHON ✦ C++ ✦ JAVASCRIPT ✦ JAVA ✦ HTML ✦ CSS ✦ SQL ✦ KOTLIN ✦ </span>
+        </div>
+    </div>
+
+    <section id="proyectos" class="proyectos">
+        <h2 class="seccion-titulo">Mis Proyectos</h2>
+        
+        <div class="grid-proyectos">
+            <!-- Proyecto 1 -->
+            <div class="tarjeta-proyecto">
+                <div class="contenido-proyecto">
+                    <h3>Culturas</h3>
+                    <p>Ecosistema e-commerce completo diseñado para la comercialización digital. Integra catálogos dinámicos, gestión avanzada de carritos de compra y bases de datos relacionales para un control de inventario preciso en tiempo real.</p>
+                    <div class="tags-tech">
+                        <span>PYTHON</span>
+                        <span>JAVASCRIPT</span>
+                        <span>SQL</span>
+                        <span>HTML/CSS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proyecto 2 -->
+            <div class="tarjeta-proyecto">
+                <div class="contenido-proyecto">
+                    <h3>Habit Up</h3>
+                    <p>Aplicación móvil de impacto social enfocada en el control de adicciones y desarrollo de hábitos. Construida de forma nativa para garantizar rendimiento, implementa sistemas de seguimiento, gráficos y notificaciones push.</p>
+                    <div class="tags-tech">
+                        <span>KOTLIN</span>
+                        <span>JAVA</span>
+                        <span>ANDROID</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <h2>¿Listo para innovar?</h2>
+        <p>Radicado en Chiapas. Disponible para proyectos freelance y colaboraciones creativas.</p>
+        <a href="mailto:243838@ids.upchiapas.edu.mx" class="link-contacto">243838@ids.upchiapas.edu.mx</a>
+    </footer>
+
+</body>
+</html>
